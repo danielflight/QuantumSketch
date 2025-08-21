@@ -43,10 +43,17 @@ pip install -e .
 
 ## Example of use
 
-Assume we have the following circuit history (starting with the latest gate):
+Assume we have the following circuit history (starting with the last gate):
 
 ```python
-history = [{'gate': 'S', 'targets': [1, 2]}, {'gate': 'S', 'targets': [4, 5]}, {'gate': 'S', 'targets': [7, 8]}, {'gate': 'S', 'targets': [10, 11]}, {'gate': 'BS', 'targets': [0, 1]}, {'gate': 'BS', 'targets': [3, 4]}, {'gate': 'BS', 'targets': [6, 7]}, {'gate': 'BS', 'targets': [9, 10]}, {'gate': 'BS', 'targets': [1, 3]}, {'gate': 'BS', 'targets': [6, 10]}, {'gate': 'BS', 'targets': [3, 10]}, {'gate': 'BS', 'targets': [1, 6]}]
+history = [
+{'gate': 'S', 'targets': [1, 2]}, {'gate': 'S', 'targets': [4, 5]}, 
+{'gate': 'S', 'targets': [7, 8]}, {'gate': 'S', 'targets': [10, 11]}, 
+{'gate': 'BS', 'targets': [0, 1]}, {'gate': 'BS', 'targets': [3, 4]}, 
+{'gate': 'BS', 'targets': [6, 7]}, {'gate': 'BS', 'targets': [9, 10]}, 
+{'gate': 'BS', 'targets': [1, 3]}, {'gate': 'BS', 'targets': [6, 10]}, 
+{'gate': 'BS', 'targets': [3, 10]}, {'gate': 'BS', 'targets': [1, 6]}
+]
 ```
 
 To obtain a pdf representation of this circuit, simply use the ```sketch_circuit()``` function:
@@ -59,7 +66,7 @@ sketch_circuit(history, num_qubits = 12)
 
 ```
 
-By default, this will create a directory named 'quantumsketch', containing only the .tex, .pdf, .aug and .log files. If one wishes for a cropped .pdf and .svg conversion, simply set ```just_pdf = False``` in the above function.
+By default, this will create a directory named 'quantumsketch_out', containing only the .tex and .pdf (and the associated .aux, .log files). If one wishes for a cropped .pdf and .svg conversion, simply set ```just_pdf = False``` in the above function.
 
 The PDF of this example circuit can be viewed [here](docs/example_circuit.png)
 

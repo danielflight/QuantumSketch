@@ -21,8 +21,8 @@ def sketch_circuit(circuit_history: list[map], num_qubits: int, rundir = None, j
     rundir = rundir if rundir else os.getcwd()
 
     # Create a directory
-    Path(f"{rundir}/quantumsketch").mkdir(parents=True, exist_ok=True)
-    savepath = f"{rundir}/quantumsketch"
+    Path(f"{rundir}/quantumsketch_out").mkdir(parents=True, exist_ok=True)
+    savepath = f"{rundir}/quantumsketch_out"
 
     # Each line starts with a qubit wire
     lines = ["\\lstick{\ket{0}} & " for i in range(num_qubits)]
