@@ -43,7 +43,7 @@ pip install -e .
 
 ## Example of use
 
-To obtain a plot, we need a history of all quantum gates applied in the format ```{"gate": "SYMBOL", "targets": [q1, ..., qN]}``` and, optionally, a ```"control"``` key. 
+To obtain a plot, we need a history of all quantum gates applied in the format ```[..., {"gate": "SYMBOL", "targets": [q1, ..., qN]},...]``` and, optionally, a ```"control"``` key. 
 
 Assume we have the following circuit history (starting with the last gate):
 
