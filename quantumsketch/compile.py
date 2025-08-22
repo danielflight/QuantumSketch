@@ -1,10 +1,11 @@
 import os
 from pathlib import Path
+from datetime import datetime
 
 from quantumsketch.tex_to_pdf import run_latex_commands
 
 
-def sketch_circuit(circuit_history: list[map], num_qubits: int, rundir = None, detected_modes: list = None, just_pdf = True):
+def sketch_circuit(circuit_history: list[map], num_qubits: int, rundir = None, detected_modes: list = None):
     """
     Draws the circuit based on its history, assuming it starts from vacuum states.
     
@@ -14,19 +15,18 @@ def sketch_circuit(circuit_history: list[map], num_qubits: int, rundir = None, d
         num_qubits (int); total number of qubits in the circuit
         rundir (str): the working directory to save the output files to
         detected_modes (list): (Optional), a list of mode indices for detected modes
-        just_pdf (bool): if True, will only output the original .pdf file
-
     """
 
     # location to save the output directory
     rundir = rundir if rundir else os.getcwd()
+    runtag = f"{datetime.today():%Y%m%d-%H.%M.%S}"
 
     # Create a directory
-    Path(f"{rundir}/quantumsketch_out").mkdir(parents=True, exist_ok=True)
-    savepath = f"{rundir}/quantumsketch_out"
+    savepath = f"{rundir}/quantumsketch_out-{runtag}"
+    Path(savepath).mkdir(parents=True, exist_ok=True)
 
     # Each line starts with a qubit wire
-    lines = ["\\lstick{\ket{0}} & " for i in range(num_qubits)]
+    lines = ["\\lstick{\\ket{0}} & " for i in range(num_qubits)]
 
     for gate in circuit_history:
         g = gate["gate"]
@@ -92,24 +92,24 @@ def sketch_circuit(circuit_history: list[map], num_qubits: int, rundir = None, d
     # now compile the rest of the LaTeX document
     with open(f"{savepath}/circuit.tex", "w") as f:
             f.write(
-            """
-            \\documentclass{amsart}
-            \\usepackage[matrix,frame,arrow]{xypic}
-            \\usepackage[braket]{qcircuit}
+"""
+\\documentclass{amsart}
+\\usepackage[matrix,frame,arrow]{xypic}
+\\usepackage[braket]{qcircuit}
 
-            \\vfuzz2pt
-            """
+\\vfuzz2pt
+"""
     )
-            f.write("\n\n\\begin{document}\n\n\[\n")
+            f.write("\n\n\\begin{document}\n\n\\[\n")
             f.write(circuit_code)
             f.write(
-            f"""
-            \]
+f"""
+\\]
 
-            \end{{document}}
-            """
+\\end{{document}}
+"""
     )
 
     # this compiles the .tex into a .pdf
-    run_latex_commands(target_file=f"{savepath}/circuit", output_dir=savepath, just_pdf=just_pdf)
+    run_latex_commands(target_file=f"{savepath}/circuit", output_dir=savepath)
 

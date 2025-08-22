@@ -70,7 +70,7 @@ sketch_circuit(history,
 
 ```
 
-By default, this will create a directory named 'quantumsketch_out', containing only the .tex and .pdf (and the associated .aux, .log files). If one wishes for a cropped .pdf and .svg conversion, simply set ```just_pdf = False``` in the above function.
+By default, this will create a directory named 'quantumsketch_out-{datetime.today():%Y%m%d-%H.%M.%S}', containing only the .tex and .pdf (and the associated .aux, .log files). 
 
 The PDF of this example circuit can be viewed [here](docs/circuit.pdf)
 
