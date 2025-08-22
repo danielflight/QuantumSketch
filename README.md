@@ -57,13 +57,16 @@ history = [
 ]
 ```
 
-To obtain a pdf representation of this circuit, simply use the ```sketch_circuit()``` function:
+To obtain a pdf representation of this circuit, simply use the ```sketch_circuit()``` function. Optionally, we can add detectors on the end by parsing a list of the detected mode indices:
 
 ```python
 
 from quantumsketch import sketch_circuit
 
-sketch_circuit(history, num_qubits = 12)
+sketch_circuit(history, 
+               num_qubits = 12, 
+               detected_modes = [1, 2, 3, 5, 6, 8, 10, 11]
+               )
 
 ```
 

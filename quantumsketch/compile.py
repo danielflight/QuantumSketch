@@ -4,7 +4,7 @@ from pathlib import Path
 from quantumsketch.tex_to_pdf import run_latex_commands
 
 
-def sketch_circuit(circuit_history: list[map], num_qubits: int, rundir = None, just_pdf = True):
+def sketch_circuit(circuit_history: list[map], num_qubits: int, rundir = None, detected_modes: list = None, just_pdf = True):
     """
     Draws the circuit based on its history, assuming it starts from vacuum states.
     
@@ -13,6 +13,7 @@ def sketch_circuit(circuit_history: list[map], num_qubits: int, rundir = None, j
                         [..., {"gate": "S", "targets": [0, 1]}, ...]
         num_qubits (int); total number of qubits in the circuit
         rundir (str): the working directory to save the output files to
+        detected_modes (list): (Optional), a list of mode indices for detected modes
         just_pdf (bool): if True, will only output the original .pdf file
 
     """
@@ -71,10 +72,20 @@ def sketch_circuit(circuit_history: list[map], num_qubits: int, rundir = None, j
                     lines[i] += "\\qw & "
 
     for i in range(num_qubits):
-        lines[i] += "\\qw & "
+        lines[i] += "\\qw & \\qw & \\qw & "
+
+    # optionally, add detectors
+    if detected_modes:
+        for i in detected_modes:
+            lines[i] += "\\meter & "
+
+        for j in range(num_qubits):
+            if j not in detected_modes:
+                lines[j] += "\\qw & \\qw & "
+            
 
     # full qcircuit code
-    circuit_code = "\\Qcircuit @C=1em @R=0.7em {\n" + "\n".join(
+    circuit_code = "\\Qcircuit @C=0.5em @R=0.7em {\n" + "\n".join(
         line[:-2] + " \\\\" for line in lines
     ) + "\n}"
 
