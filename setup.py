@@ -7,7 +7,7 @@ setup(
     # install_requires=[
         
     # ]
-    python_requires=">=3.8",
+    python_requires=">=3.11",
     author="Daniel Flight",
     description="Quantum circuit drawing and LaTeX export using qcircuit",
     url="https://github.com/danielflight/QuantumSketch",
