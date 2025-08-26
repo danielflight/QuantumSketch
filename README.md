@@ -57,7 +57,7 @@ history = [
 ]
 ```
 
-To obtain a pdf representation of this circuit, simply use the ```sketch_circuit()``` function. Optionally, we can add detectors on the end by parsing a list of the detected mode indices:
+To obtain a pdf representation of this circuit, simply use the ```sketch_circuit()``` function. Optionally, we can add detectors on the end by passing a list of the detected mode indices:
 
 ```python
 
