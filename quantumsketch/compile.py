@@ -95,6 +95,7 @@ def sketch_circuit(circuit_history: list[map], num_qubits: int, rundir = None, d
 """
 \\documentclass{amsart}
 \\usepackage[matrix,frame,arrow]{xypic}
+\\usepackage[a4paper,landscape,margin=1.5cm]{geometry}
 \\usepackage[braket]{qcircuit}
 
 \\vfuzz2pt
